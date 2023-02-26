@@ -1,0 +1,20 @@
+<div class = "row text-center mb-4">
+<div class="form-signin w-100 m-auto">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+    <img class="mb-4" src="../../../assets/logo-barbershop.jpg" alt="logo" width="100" >
+    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="celular" placeholder="3012345678" formControlName="celular">
+      <label for="celular">Celular</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+      <label for="password">Password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+  </form>
+</div>
+</div>
