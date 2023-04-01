@@ -1,4 +1,8 @@
 export interface AuthResponse{
-  status:string;
-  result:any;
+  status: string;
+  result: Result;
+}
+
+interface Result {
+  token: string;
 }

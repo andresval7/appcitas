@@ -12,7 +12,7 @@ import { ApiService } from '../../services/api/api.service'
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    celular : new FormControl('', {validators: Validators.required,nonNullable: true}),
+    celular : new FormControl('', {validators: [Validators.required, Validators.minLength(9)],nonNullable: true}),
     password : new FormControl('', {validators: Validators.required,nonNullable: true})
   });
 
@@ -29,15 +29,15 @@ export class LoginComponent implements OnInit {
       password: form.password
     };
     console.log(auth);
+    
     this.api.loginByCelular(auth).subscribe(data =>{
       //console.log(data);
       let dataResponse: AuthResponse = data;
-      console.log(dataResponse);
-    }, error =>{ 
-      let dataError: AuthResponse = error;
-      console.log(dataError.result);
+      console.log(dataResponse.result.token);
+      
     });
-
+    
   }
+
 
 }
