@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Auth } from 'src/app/models/auth.model';
 import { AuthResponse } from 'src/app/models/authResponse.model';
-import { ApiService } from '../../services/api/api.service'
+import { ApiService } from '../../services/api/api.service';
+import {  Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -16,27 +18,29 @@ export class LoginComponent implements OnInit {
     password : new FormControl('', {validators: Validators.required,nonNullable: true})
   });
 
-  constructor(private api:ApiService) { }
+  constructor(private api:ApiService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
   onLogin(form:any){
-    // console.log(form);
-    // console.log(form.celular);
     const auth:Auth = {
       celular: form.celular,
       password: form.password
     };
-    console.log(auth);
-    
+    //console.log(auth);
+
     this.api.loginByCelular(auth).subscribe(data =>{
+      if(data){
+
+        this.router.navigate(['']);
+      }
       //console.log(data);
-      let dataResponse: AuthResponse = data;
-      console.log(dataResponse.result.token);
-      
+      let dataResponse: AuthResponse|void = data;
+      //console.log(dataResponse.result.token);
+
     });
-    
+
   }
 
 

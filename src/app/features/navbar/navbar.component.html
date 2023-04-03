@@ -5,10 +5,13 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/login">Ingresar</a>
-          </li>
+        <ul class="navbar-nav" *ngIf="userName; else elseBlock">
+            <li class="nav-item" >
+              <a class="nav-link" routerLink="">{{userName}}</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" (click)="cerrarSesion()" routerLink="">Cerrar sesión</a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="#">Registro</a>
           </li>
@@ -16,6 +19,19 @@
             <a class="nav-link" routerLinkActive="active" routerLink="#">Contactanos</a>
           </li>
         </ul>
+        <ng-template #elseBlock>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="login">Ingresar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="#">Registro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="#">Contactanos</a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </div>
   </nav>

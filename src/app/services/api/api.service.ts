@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '../../models/auth.model';
-import { AuthResponse } from '../../models/authResponse.model';
+import { AuthResponse } from 'src/app/models/authResponse.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -11,23 +11,28 @@ const helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class ApiService {
-  //private user = new BehaviorSubject<AuthResponse>(boolean);
+  private loggedIn = new BehaviorSubject<boolean>(false);
   url:string = '/api/'; //Hay un proxy de desarrollo para evitar CORS
-  
-  constructor(private http:HttpClient) { 
+
+
+  constructor(private http:HttpClient) {
     this.checkToken();
   }
 
+  get isLogged(): Observable<boolean>{
+    return this.loggedIn.asObservable();
+  }
 
-  loginByCelular(form:Auth): Observable<AuthResponse>{
+  loginByCelular(form:Auth): Observable<AuthResponse | void>{
     let direccion: string = this.url + 'auth';
-    return this.http
-    .post<AuthResponse>(direccion,form)
+    return this.http.post<AuthResponse>(direccion,form)
     .pipe(
-      map((user: AuthResponse) => {
-        this.saveLocalStorage(user);
-        //this.user.next(user);
-        return user;
+      map((res:AuthResponse)=>{
+        console.log('Res -> ', res);
+        this.saveToken(res.result.token);
+        this.saveCelular(form.celular);
+        this.loggedIn.next(true);
+        return res;
       }),
       catchError((err) => this.handlerError(err))
     );
@@ -35,17 +40,36 @@ export class ApiService {
 
   logout(): void{
     localStorage.removeItem('token');
+    localStorage.removeItem('celular');
+    this.loggedIn.next(false);
   }
 
+  private saveToken(token:string): void{
+    localStorage.setItem('token', token);
+  }
+
+  private saveCelular(celular:string): void{
+    localStorage.setItem('celular', celular);
+  }
+
+/*
   private saveLocalStorage(user: AuthResponse): void {
     const { status, result, ...rest } = user;
     localStorage.setItem('user', JSON.stringify(rest));
   }
-
+*/
   private checkToken(): void{
     const userToken = localStorage.getItem('token');
-    const isExpired = helper.isTokenExpired(userToken);
-    console.log('isExpired ->',isExpired);
+    if(userToken){
+      this.logout();
+    }
+    else{
+      this.loggedIn.next(true);
+    }
+
+    //const isExpired = helper.isTokenExpired(userToken);
+    //const isExpired = helper.isTokenExpired(userToken);
+    //console.log('isExpired -> ',isExpired);
   }
 
   private handlerError(err: any): Observable<never>{
@@ -56,6 +80,6 @@ export class ApiService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-  
+
 }
 
