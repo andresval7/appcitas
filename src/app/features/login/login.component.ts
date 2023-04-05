@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.api.loginByCelular(auth).subscribe(data =>{
       if(data){
 
-        this.router.navigate(['']);
+        this.router.navigate(['services']);
       }
       //console.log(data);
       let dataResponse: AuthResponse|void = data;
