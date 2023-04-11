@@ -1,13 +1,16 @@
 <div class = "text-center">
   <app-navbar></app-navbar>
   <h1>Listado de servicios</h1>
-  <div class="card" style="width: 18rem;">
-    <img src="../../../assets/corte1.jpeg" class="card-img-top" alt="corte1.jpg">
+  <div class="card" style="width: 18rem;" *ngFor="let tipoSvc of tipoServicios">
+    <img src="https://andresvportfolio.000webhostapp.com{{tipoSvc.ImagenServicio}}" class="card-img-top" alt="imagenServicio.jpg">
     <div class="card-body">
-      <h5 class="card-title">Corte de cabello</h5>
-      <p class="card-text">Agenda aquí tu cita para corte de cabello.</p>
+      <h4 class="card-title">{{tipoSvc.NombreServicio}}</h4>
+      <p class="card-text">{{tipoSvc.DescripcionServicio}}</p>
+      <h5>${{tipoSvc.ValorServicio}}</h5>
       <a href="#" class="btn btn-primary">Agendar</a>
     </div>
   </div>
+  <br>
+  <!-- <p *ngFor="let tipoSvc of tipoServicios">{{tipoSvc.NombreServicio}}</p> -->
 </div>
 
