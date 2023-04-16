@@ -10,6 +10,7 @@ import { NavbarComponent } from './features/navbar/navbar.component';
 import { HomeComponent } from './features/home/home.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 import { ServicesComponent } from './features/services/services.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ServicesComponent } from './features/services/services.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,7 +14,7 @@ export class TipoServicioService {
 
   getTipoServicio(): Observable<TipoServicio[] | void>{
     let direccion: string = this.url + 'tipoServicio';
-    console.log('url: ', direccion);
+    //console.log('url: ', direccion);
     return this.http.get<TipoServicio[]>(direccion);
   }
 

@@ -1,16 +1,46 @@
 <div class = "text-center">
   <app-navbar></app-navbar>
   <h1>Listado de servicios</h1>
-  <div class="card" style="width: 18rem;" *ngFor="let tipoSvc of tipoServicios">
-    <img src="https://andresvportfolio.000webhostapp.com{{tipoSvc.ImagenServicio}}" class="card-img-top" alt="imagenServicio.jpg">
-    <div class="card-body">
-      <h4 class="card-title">{{tipoSvc.NombreServicio}}</h4>
-      <p class="card-text">{{tipoSvc.DescripcionServicio}}</p>
-      <h5>${{tipoSvc.ValorServicio}}</h5>
-      <a href="#" class="btn btn-primary">Agendar</a>
-    </div>
+  <div class="row">
+      <div class="card" style="width: 18rem; margin-right:4px;" *ngFor="let tipoSvc of tipoServicios">
+        <img src="https://andresvportfolio.000webhostapp.com{{tipoSvc.ImagenServicio}}" class="card-img-top" style="height: 12rem;margin-top:2px;" alt="imagenServicio.jpg">
+        <div class="card-body">
+          <h4 class="card-title">{{tipoSvc.NombreServicio}}</h4>
+          <p class="card-text">{{tipoSvc.DescripcionServicio}}</p>
+          <h5>${{tipoSvc.ValorServicio}}</h5>
+          <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#citaModal" (click)="setTipoSvc(tipoSvc)">Agendar</a>
+        </div>
+      </div>
   </div>
   <br>
-  <!-- <p *ngFor="let tipoSvc of tipoServicios">{{tipoSvc.NombreServicio}}</p> -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="citaModal" tabindex="-1" aria-labelledby="citaModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h1 class="modal-title fs-5" id="citaModalLabel">{{nombreServicio}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="citaForm" (ngSubmit)="agendarCita(citaForm.value)">
+          <div class="form-floating">
+            <input type="date" class="form-control" formControlName="fechaCita" id="fechaCita">
+            <label for="fechaCita">Fecha</label>
+          </div>
+          <div class="form-floating">
+            <input type="time" class="form-control" formControlName="horaCita" id="horaCita">
+            <label for="fechaCita">Hora</label>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Agendar Cita</button>
+      </div>
+    </div>
+  </div>
 </div>
 

@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     else{
       this.userName = 'Ingresar';
     }
-    console.log(this.userName)
+    //console.log(this.userName)
   }
 
   ngOnInit(): void { }
