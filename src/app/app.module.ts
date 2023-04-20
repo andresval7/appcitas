@@ -11,6 +11,7 @@ import { HomeComponent } from './features/home/home.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 import { ServicesComponent } from './features/services/services.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarComponent } from './features/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     NavbarComponent,
     HomeComponent,
     PageNotFoundComponent,
-    ServicesComponent
+    ServicesComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

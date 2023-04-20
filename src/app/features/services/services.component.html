@@ -17,24 +17,34 @@
 
 <!-- Modal -->
 <div class="modal fade" id="citaModal" tabindex="-1" aria-labelledby="citaModalLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
         <h1 class="modal-title fs-5" id="citaModalLabel">{{nombreServicio}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="citaForm" (ngSubmit)="agendarCita(citaForm.value)">
-          <div class="form-floating">
-            <input type="date" class="form-control" formControlName="fechaCita" id="fechaCita">
-            <label for="fechaCita">Fecha</label>
-          </div>
-          <div class="form-floating">
-            <input type="time" class="form-control" formControlName="horaCita" id="horaCita">
-            <label for="fechaCita">Hora</label>
-          </div>
+        <div class="row" style="margin-bottom: 2px;">
+          <form [formGroup]="citaForm" (ngSubmit)="agendarCita(citaForm.value)">
+            <div class="form-floating">
+              <input type="date" class="form-control" formControlName="fechaCita" id="fechaCita">
+              <label for="fechaCita">Fecha</label>
+            </div>
+            <div class="form-floating">
+              <input type="time" class="form-control" formControlName="horaCita" id="horaCita">
+              <label for="fechaCita">Hora</label>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <full-calendar [options]="calendarOptions">
+            <ng-template #eventContent let-arg>
+              <b>{{ arg.timeText }}</b>
+              <i>{{ arg.event.title }}</i>
+            </ng-template>
+          </full-calendar>
+        </div>
 
-        </form>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
