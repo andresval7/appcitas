@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './features/page-not-found/page-not-found.
 import { ServicesComponent } from './features/services/services.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './features/calendar/calendar.component';
+import { CarouselComponent } from './features/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CalendarComponent } from './features/calendar/calendar.component';
     HomeComponent,
     PageNotFoundComponent,
     ServicesComponent,
-    CalendarComponent
+    CalendarComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
